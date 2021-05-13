@@ -1,0 +1,101 @@
+@import './var.scss';
+
+
+// 模块的命名空间
+@mixin b($block) {
+  $B: $namespace + '-' + $block !global;
+  .#{$B} {
+    @content;
+  }
+}
+
+// 模块或组件状态 例如 .xxx.is-disabled
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
+
+// 模块或组件的修饰样式 例如 .xxx--primary
+@mixin  m($modifier) {
+  @at-root {
+    #{&+$modifier-separator+$modifier} {
+      @content;
+    }
+  }
+}
+
+// 模块子元素  .xxx .xxx__header
+@mixin e($element) {
+  @at-root {
+    & {
+      .#{$B + $element-separator + $element} {
+        @content;
+      }
+    }
+  }
+}
+
+// flex x 居中
+@mixin flex-x {
+  display: flex;
+  justify-content: center;
+}
+
+// flex y 居中
+@mixin flex-y {
+  display: flex;
+  align-items: center;
+}
+
+// flex  x y 居中 
+@mixin flex-x-y {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+@include b(flex){
+  display: flex;
+}
+
+
+// 蓝色hover active样式
+@mixin blue-common {
+  &:hover {
+    color: $color-hover;
+  }
+  &:active {
+    color: $color-press;
+  }
+}
+
+
+
+
+// 公用筛选条件样式
+@include b(filter-warp) {
+  @include flex-between;
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: $border-color-gray;
+  .el-input, .el-select {
+    width: 200px;
+    margin-right: 30px;
+  }
+}
+
+
+
+.pointer{
+  cursor: pointer;
+  outline: none;
+  @include  blue-common();
+}

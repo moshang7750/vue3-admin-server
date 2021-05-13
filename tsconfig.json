@@ -10,6 +10,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
+    "declaration": true, // 生成声明文件
     "sourceMap": true,
     "baseUrl": ".",
     "types": [

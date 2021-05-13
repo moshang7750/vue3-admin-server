@@ -1,0 +1,26 @@
+
+.el-button {
+  border-radius: 2px;
+}
+@include b(common__btns) {
+  margin: 20px 0;
+  .el-button {
+    border-radius: 2px;
+  }
+}
+@include b(pagination){
+  @include flex-between;
+  margin-top: 30px;
+}
+
+
+// 网站信息管理
+@include b(picture__banner) {
+  .el-upload-list {
+    display: flex;
+    .el-upload-list__item{
+      width: 300px;
+      margin-right: 30px;
+    }
+  }
+}

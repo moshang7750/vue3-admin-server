@@ -1,0 +1,24 @@
+$namespace:'af'; // scss变量  命名空间
+$state-prefix:'is-'; // 状态
+$modifier-separator:'--'; // 表修饰作用
+$element-separator:'__'; // 元素之间的分割
+
+// 基础颜色
+$header-bg: #161A26;
+$active-bg: #e4e4e4;
+
+$color-primary: #5A91FF;
+$btn-primary:#4B82F1;
+$color-white: #FFFFFF;
+$color-black: #000000;
+$color-success: #67C23A;
+$color-warning: #E6A23C;
+$color-danger: #FF4D4D;
+$color-info: #909399;
+
+$color-normal: #4B82F1;
+$color-hover: #5A91FF;
+$color-press: #3E75E4;
+
+$border-color-gray: #e5e5e5;
+// container

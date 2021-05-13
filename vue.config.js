@@ -1,19 +1,20 @@
-'use strict'
-var path = require('path')
+// 'use strict'
+const path = require('path')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
 const isProduction = process.env.NODE_ENV === 'production'
-const cdn = {
-  css: [],
-  js: [
-    'https://cdn.bootcss.com/vue/2.6.1/vue.runtime.min.js',
-    'https://cdn.bootcss.com/vue-router/3.2.0/vue-router.min.js',
-    'https://cdn.bootcss.com/vuex/3.6.2/vuex.min.js',
-    'https://cdn.bootcss.com/axios/0.21.1/axios.min.js',
-  ],
-}
+// const cdn = {
+//   css: [],clear
+
+//   js: [
+//     'https://cdn.bootcss.com/vue/2.6.1/vue.runtime.min.js',
+//     'https://cdn.bootcss.com/vue-router/3.2.0/vue-router.min.js',
+//     'https://cdn.bootcss.com/vuex/3.6.2/vuex.min.js',
+//     'https://cdn.bootcss.com/axios/0.21.1/axios.min.js',
+//   ],
+// }
 
 module.exports = {
   // mode: process.env.NODE_ENV,
@@ -42,7 +43,6 @@ module.exports = {
   },
 
   chainWebpack: (config) => {
-
     // 路径别名
     config.resolve.alias
       .set('@', resolve('src'))
@@ -50,8 +50,8 @@ module.exports = {
 
     // 修复热更新模块
     config.resolve.symlinks(true)
-     // 生产环境注入cdn
-     config.plugin('html').tap((args) => {
+    // 生产环境注入cdn
+    config.plugin('html').tap((args) => {
       // args[0].cdn = cdn
       args[0].title = '网站管理后台'
       return args
@@ -92,8 +92,6 @@ module.exports = {
         },
       })
       config.optimization.runtimeChunk('single')
-
-     
     }
 
     config.module.rule('vue').use('vue-loader').loader('vue-loader')
