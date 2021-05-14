@@ -79,3 +79,24 @@ export enum DepartureStatus {
   '待处理' = 0,
   '已处理' = 1,
 }
+
+// 网站信息管理
+
+export type MessageFile = {
+  agreement: number
+  clause: number
+  graphical: number
+}
+
+export type FileListItem = {
+  name: string
+  url: string
+  [key: string]: any
+}
+
+export type MessageDoc = {
+  agreementDoc: string
+  clauseDoc: string
+  agreemetFileList: FileListItem[]
+  clauseFileList: FileListItem[]
+}
