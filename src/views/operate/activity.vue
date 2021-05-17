@@ -2,7 +2,7 @@
   <div class="af-activity">
     <Tabs :tabData="tabData" />
     <div class="af-common__btns">
-      <el-button type="primary">新增</el-button>
+      <el-button type="primary" @click="addActivity">新增</el-button>
       <el-button type="success">导出报表</el-button>
     </div>
     <div class="af-filter-warp">
@@ -63,11 +63,16 @@ import Tabs from '@/components/common/tabs.vue'
 import { defineComponent, reactive, Ref, ref, watch } from 'vue'
 import { ActiveFilter, ActiveTable, StatusData } from '@/types/operate.type'
 import { useMethons } from '../../libs/useMethons'
+import { useRouter } from 'vue-router'
 export default defineComponent({
   components: { Tabs },
   setup(props) {
     // tab
     const tabData = ref([{ name: '活动', type: 1 }])
+    const router = useRouter()
+    const addActivity = () => {
+      router.push('activity/add')
+    }
     // 筛选框
     const params: ActiveFilter = reactive({
       activeName: '',
@@ -109,6 +114,7 @@ export default defineComponent({
     // })
     return {
       tabData,
+      addActivity,
       typeData,
       params,
       tableData,

@@ -24,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/member/member.vue'),
       },
       {
+        path: 'member/:id',
+        name: 'MemberDialog',
+        component: () => import('@/views/member/components/memberDialog.vue'),
+      },
+      {
         path: 'operate', // 运营管理
         name: 'Operate',
         redirect: '/operate/content',
@@ -41,6 +46,15 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('@/views/operate/content.vue'),
           },
           {
+            path: 'content/:id', // 内容管理添加
+            name: 'ContentDialog',
+            meta: {
+              name: '内容管理',
+            },
+            component: () =>
+              import('@/views/operate/components/contentDialog.vue'),
+          },
+          {
             path: 'means', // 资料管理
             name: 'Means',
             meta: {
@@ -48,6 +62,13 @@ const routes: Array<RouteRecordRaw> = [
             },
             component: () => import('@/views/operate/means.vue'),
           },
+          {
+            path: 'means/:id', // 资料管理新增
+            name: 'MeansDialog',
+            component: () =>
+              import('@/views/operate/components/meansDialog.vue'),
+          },
+
           {
             path: 'activity', // 活动管理
             name: 'Activity',
@@ -57,12 +78,24 @@ const routes: Array<RouteRecordRaw> = [
             component: () => import('@/views/operate/activity.vue'),
           },
           {
+            path: 'activity/:id', // 活动管理
+            name: 'Activity',
+            component: () =>
+              import('@/views/operate/components/activityDialog.vue'),
+          },
+          {
             path: 'tools', // 工具管理
             name: 'Tools',
             meta: {
               name: '工具管理',
             },
             component: () => import('@/views/operate/tools.vue'),
+          },
+          {
+            path: 'tools/:id', // 工具管理新增
+            name: 'ToolsDialog',
+            component: () =>
+              import('@/views/operate/components/toolsDialog.vue'),
           },
           {
             path: 'field', // 栏位管理
@@ -114,6 +147,12 @@ const routes: Array<RouteRecordRaw> = [
               name: '角色管理',
             },
             component: () => import('@/views/jurisdiction/role.vue'),
+          },
+          {
+            path: 'role/:id',
+            name: 'RoleDialog',
+            component: () =>
+              import('@/views/jurisdiction/components/roleDialog.vue'),
           },
           {
             path: 'message', // 网站信息管理

@@ -24,3 +24,13 @@
     }
   }
 }
+
+// 公用弹窗添加
+@include b(edit-dialog){
+  .el-form{
+    .el-input, .el-select, .el-textarea, .el-upload-list__item{
+      width: 400px;
+    }
+  }
+ 
+}

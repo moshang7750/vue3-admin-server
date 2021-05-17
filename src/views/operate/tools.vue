@@ -2,7 +2,7 @@
   <div class="af-tools">
     <Tabs :tabData="tabData" />
     <div class="af-common__btns">
-      <el-button type="primary">新增</el-button>
+      <el-button type="primary" @click="addTools">新增</el-button>
       <el-button type="success">导出报表</el-button>
     </div>
     <div class="af-filter-warp">
@@ -62,14 +62,19 @@
 
 <script lang="ts">
 import Tabs from '@/components/common/tabs.vue'
-import { defineComponent, reactive, Ref, ref, watch } from 'vue'
+import { defineComponent, reactive, Ref, ref } from 'vue'
 import { ToolFilter, ToolTable, StatusData } from '@/types/operate.type'
 import { useMethons } from '../../libs/useMethons'
+import { useRouter } from 'vue-router'
 export default defineComponent({
   components: { Tabs },
   setup(props) {
     // tab
     const tabData = ref([{ name: '活动', type: 1 }])
+    const router = useRouter()
+    const addTools = () => {
+      router.push('tools/add')
+    }
     // 筛选框
     const params: ToolFilter = reactive({
       toolName: '',
@@ -112,6 +117,7 @@ export default defineComponent({
     // })
     return {
       tabData,
+      addTools,
       typeData,
       params,
       tableData,

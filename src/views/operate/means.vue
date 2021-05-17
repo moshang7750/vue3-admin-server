@@ -1,8 +1,8 @@
 <template>
   <div class="af-means">
-    <Tabs :tabData="tabData" @tab-change="TabChange" />
+    <Tabs :tabData="tabData" />
     <div class="af-common__btns">
-      <el-button type="primary">新增</el-button>
+      <el-button type="primary" @click="addMeans">新增</el-button>
       <el-button type="success">导出报表</el-button>
     </div>
     <div class="af-filter-warp">
@@ -72,13 +72,15 @@ import Tabs from '@/components/common/tabs.vue'
 import { defineComponent, reactive, Ref, ref, watch } from 'vue'
 import { MeansFilter, MeansTable, StatusData } from '@/types/operate.type'
 import { useMethons } from '../../libs/useMethons'
+import { useRouter } from 'vue-router'
 export default defineComponent({
   components: { Tabs },
   setup(props) {
     // tab
     const tabData = ref([{ name: '资料', type: 1 }])
-    const TabChange = (value: number) => {
-      console.log(value)
+    const router = useRouter()
+    const addMeans = () => {
+      router.push('means/add')
     }
     // 筛选框
     const params: MeansFilter = reactive({
@@ -122,12 +124,12 @@ export default defineComponent({
     // })
     return {
       tabData,
+      addMeans,
       typeData,
       params,
       tableData,
       totals,
       statusData,
-      TabChange,
       ...methods,
     }
   },

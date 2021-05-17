@@ -2,7 +2,7 @@
   <div class="af-contents">
     <Tabs :tabData="tabData" @tab-change="TabChange" />
     <div class="af-common__btns">
-      <el-button type="primary">新增</el-button>
+      <el-button type="primary" @click="addContent">新增</el-button>
       <el-button type="success">导出报表</el-button>
     </div>
     <div class="af-filter-warp">
@@ -59,19 +59,22 @@
 
 <script lang="ts">
 import Tabs from '@/components/common/tabs.vue'
-import { defineComponent, reactive, Ref, ref, watch } from 'vue'
+import { defineComponent, reactive, Ref, ref } from 'vue'
 import { OperateFilter, OperateTable, StatusData } from '@/types/operate.type'
 import { useMethons } from '../../libs/useMethons'
+import { useRouter } from 'vue-router'
 export default defineComponent({
   components: { Tabs },
   setup(props) {
     // tab
     const tabData = ref([
-      { name: '普通会员', type: 1 },
-      { name: '付费会员', type: 2 },
+      { name: '新闻', type: 1 },
+      { name: '研究领域', type: 2 },
+      { name: '服务', type: 3 },
     ])
+    let type = ref(1)
     const TabChange = (value: number) => {
-      console.log(value)
+      type.value = value
     }
     // 筛选框
     const params: OperateFilter = reactive({
@@ -113,6 +116,16 @@ export default defineComponent({
     // watch(params, (newd, old) => {
     //   console.log(newd, old)
     // })
+
+    const router = useRouter()
+    const addContent = () => {
+      router.push({
+        path: 'content/add',
+        query: {
+          type: type.value,
+        },
+      })
+    }
     return {
       tabData,
       typeData,
@@ -122,6 +135,7 @@ export default defineComponent({
       statusData,
       TabChange,
       ...methods,
+      addContent,
     }
   },
 })

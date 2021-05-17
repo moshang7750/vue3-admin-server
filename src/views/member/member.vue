@@ -2,7 +2,7 @@
   <div class="af-member">
     <Tabs :tabData="tabData" @tab-change="TabChange" />
     <div class="af-common__btns">
-      <el-button type="primary">新增</el-button>
+      <el-button type="primary" @click="addMember">新增</el-button>
       <el-button type="success">导出报表</el-button>
     </div>
     <div class="af-filter-warp">
@@ -33,6 +33,7 @@
 <script lang="ts">
 import Tabs from '@/components/common/tabs.vue'
 import { TableDataItemMember } from '@/types/common.types'
+import { useRouter } from 'vue-router'
 import { defineComponent, Ref, ref } from 'vue'
 export default defineComponent({
   components: { Tabs },
@@ -57,10 +58,15 @@ export default defineComponent({
         status: 1,
       },
     ])
+    const router = useRouter()
+    const addMember = () => {
+      router.push(`/member/add`)
+    }
     return {
       tabData,
       TabChange,
       tableData,
+      addMember,
     }
   },
 })

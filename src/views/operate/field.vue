@@ -2,7 +2,7 @@
   <div class="af-field">
     <Tabs :tabData="tabData" />
     <div class="af-common__btns">
-      <el-button type="primary">新增</el-button>
+      <el-button type="primary" @click="addField">新增</el-button>
       <el-button type="success">导出报表</el-button>
     </div>
     <div class="af-filter-warp">
@@ -74,11 +74,16 @@ import Tabs from '@/components/common/tabs.vue'
 import { defineComponent, reactive, Ref, ref, watch } from 'vue'
 import { FieldFilter, FieldTable, StatusData } from '@/types/operate.type'
 import { useMethons } from '../../libs/useMethons'
+import { useRouter } from 'vue-router'
 export default defineComponent({
   components: { Tabs },
   setup(props) {
     // tab
     const tabData = ref([{ name: '栏位', type: 1 }])
+    const router = useRouter()
+    const addField = () => {
+      router.push('field/add')
+    }
     // 筛选框
     const params: FieldFilter = reactive({
       id: '',
@@ -169,6 +174,7 @@ export default defineComponent({
     // })
     return {
       tabData,
+      addField,
       params,
       filterName,
       treeData,
