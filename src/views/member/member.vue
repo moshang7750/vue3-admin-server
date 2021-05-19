@@ -34,7 +34,8 @@
 import Tabs from '@/components/common/tabs.vue'
 import { TableDataItemMember } from '@/types/common.types'
 import { useRouter } from 'vue-router'
-import { defineComponent, Ref, ref } from 'vue'
+import { defineComponent, onMounted, Ref, ref } from 'vue'
+import { getMemberList } from '@/api/index'
 export default defineComponent({
   components: { Tabs },
 
@@ -62,6 +63,11 @@ export default defineComponent({
     const addMember = () => {
       router.push(`/member/add`)
     }
+
+    onMounted(async () => {
+      let data = await getMemberList({ page: 1, size: 10 })
+      console.log(data, 'data')
+    })
     return {
       tabData,
       TabChange,
