@@ -8,9 +8,7 @@ const router = new Router({
  * 用户注册接口
  * /auth/register
  */
-
-
- router.post('/register', async ctx => {
+router.post('/register', async ctx => {
   ctx.body = await registerController(ctx.request.body)
 })
 
@@ -30,10 +28,12 @@ const router = new Router({
  */
 
 router.get('/test', async ctx => {
+  // console.log(1111, ctx)
   ctx.body = '1111'
 })
 
 router.post('/test2', async ctx => {
+  // console.log(ctx.state)
   ctx.body = '2222'
 })
 

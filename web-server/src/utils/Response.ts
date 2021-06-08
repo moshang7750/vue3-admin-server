@@ -1,5 +1,4 @@
 // 请求响应封装
-
 interface ResponseData {
   code: number;
   data?: any;
@@ -11,18 +10,19 @@ class BaseResponse {
   public data: any;
   public message!: string;
   constructor({ code, data, message }: ResponseData) {
-    this.code = code
-    if (data) this.data = data
-    if (message) this.message = message
+    this.code = code;
+    if (data) this.data = data;
+    if (message) this.message = message;
   }
 }
 
 export class SuccessResponse extends BaseResponse {
-  constructor(data: any) {
+  constructor(code = 200, message = '', data: any = {}) {
     super({
-      code: 0,
-      data
-    })
+      code,
+      message,
+      data,
+    });
   }
 }
 
@@ -30,7 +30,7 @@ export class ErrorResponse extends BaseResponse {
   constructor(code: number, message: string) {
     super({
       code,
-      message
-    })
+      message,
+    });
   }
 }

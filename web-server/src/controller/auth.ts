@@ -5,6 +5,7 @@ import { ErrorResponse, SuccessResponse } from '../utils/Response'
 import errorInfo from '../constants/errorInfo'
 import { createMd5 } from '../utils/createMD5'
 import { createToken } from '../utils/token'
+import { SuccessCode, SuccessTypeInfo } from '../services/success.type'
 
 const { registerUserNameExistInfo, registerFailInfo, loginFailInfo } = errorInfo
 
@@ -27,7 +28,7 @@ export const registerController = async (params: RegisterModel) => {
       ...params,
       password: createMd5(password),
     })
-    return new SuccessResponse({})
+    return new SuccessResponse(SuccessCode.x, SuccessTypeInfo.create)
   } catch (err) {
     // 注册失败
     console.log(err.message, err.stack)
@@ -51,9 +52,8 @@ export const loginController = async (params: LoginModel) => {
     const { id, username } = userInfo
     const token = createToken({ id, username })
 
-    return new SuccessResponse({ token })
+    return new SuccessResponse(SuccessCode.x, SuccessTypeInfo.login, { token })
   }
-
   // 获取不到返回 登录失败
   const { code, message } = loginFailInfo
   return new ErrorResponse(code, message)

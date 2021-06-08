@@ -1,4 +1,4 @@
-import { Model, DataTypes, Optional } from 'sequelize';
+import Sequelize,  { Model, DataTypes, Optional } from 'sequelize';
 import seq from '../db';
 
 // sequelize+typescript 参考文档
@@ -7,27 +7,28 @@ import seq from '../db';
 export interface UserModelProps {
   id: number;
   username: string;
-  password: string;
+  password?: string;
   email: string | null;
   phone: string | null;
-  userGroupId?: number | null;
+  userGroupId: number | null;
   userGroupName?: string | null;
-  roleId?: number | null;
+  roleId: number | null;
   roleName?: string | null;
-  status: 0 | 1;
+  status?: 0 | 1
   createTime?: string | Date
+  user_group?: any
 }
 
 export type RegisterModel = Omit<
   UserModelProps,
-  'id' | 'userGroupId' | 'userGroupName' | 'roleId' | 'roleName'
+  'id'  | 'userGroupName' | 'roleName'
 >;
 
 // 在“User.build”和“User.create”调用中，有些属性是可选的
 interface UserCreationAttributes
   extends Optional<
     UserModelProps,
-    'id' | 'status' | 'userGroupId' | 'userGroupName' | 'roleId' | 'roleName'
+    'id' | 'status'  | 'userGroupName' | 'roleName'
   > {}
 
 interface UserInstance
@@ -60,7 +61,11 @@ const User = seq.define<UserInstance>('user', {
     userGroupId: {
       type: DataTypes.BIGINT,
       allowNull: true,
-      comment: "所属用户组"
+      comment: "所属用户组",
+      references: {
+        model: 'UserGroup',
+        key: 'id'
+      }
     },
     userGroupName: {
       type: DataTypes.STRING(30),
@@ -69,7 +74,11 @@ const User = seq.define<UserInstance>('user', {
     roleId: {
       type: DataTypes.BIGINT,
       allowNull: true,
-      comment: "所属角色"
+      comment: "所属角色",
+      references: {
+        model: 'Role',
+        key: 'id'
+      }
     },
     roleName: {
       type: DataTypes.STRING(30),
@@ -81,7 +90,8 @@ const User = seq.define<UserInstance>('user', {
     },
     createTime: {
       type: DataTypes.DATE,
-      allowNull: true
+      allowNull: true,
+      defaultValue: Sequelize.NOW
     }
   }, {
     freezeTableName: true

@@ -3,7 +3,7 @@ import cors from '@koa/cors'
 import logger from 'koa-logger'
 import bodyparser from 'koa-bodyparser'
 // routes
-import authRoutes from './routes/auth'
+import routes from './routes/index'
 import jwt from 'koa-jwt'
 import { jwtSecret } from './config/auth'
 
@@ -48,7 +48,7 @@ app.use(jwt(({ secret: jwtSecret })).unless({
 
 // routes
 // 用户验证路由（登录 注册）
-app.use(authRoutes.routes()).use(authRoutes.allowedMethods())
+app.use(routes.routes()).use(routes.allowedMethods())
 
 // listen
 const port = process.env.PORT || '3003'
