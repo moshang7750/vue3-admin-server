@@ -40,7 +40,7 @@ export const getOneUserController = async ({ id } : { id: number}) => {
 export const setUserStatusController = async (params: IUserStatus) => {
   const { status } = params
   if(status != 0 && status != 1) {
-    return new ErrorResponse(500, 'status 只能为0或1')
+    return new ErrorResponse(SuccessCode.e, 'status 只能为0或1')
   }
   try{
     await setUserStatus(params)

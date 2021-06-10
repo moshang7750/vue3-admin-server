@@ -52,7 +52,7 @@ const errorInfo: IErrorInfo = {
   // 用户信息失败
   getUserInfoFailInfo: {
     code: 10007,
-    message: '用户信息获取失败'
+    message: '信息获取失败'
   },
   getUserListFailInfo: {
     code: 10008,

@@ -31,6 +31,7 @@ export class ErrorResponse extends BaseResponse {
     super({
       code,
       message,
+      data: {},
     });
   }
 }

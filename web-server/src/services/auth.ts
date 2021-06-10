@@ -43,12 +43,12 @@ export const getUserInfo = async ({
     username,
   };
   if (password) {
-    where.password = createMd5(password);
+    // where.password = createMd5(password);
+    where.password = password;
   }
   if (typeof id != 'undefined') {
     where.id = id;
   }
-
   const result = await UserModel.findOne({
     attributes: {
       exclude: ['password', 'createdAt', 'updatedAt'],

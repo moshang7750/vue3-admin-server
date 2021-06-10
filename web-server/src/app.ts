@@ -40,7 +40,7 @@ app.use((ctx, next) => {
 // token验证 header未携带token 直接返回401 Authentication Error
 app.use(jwt(({ secret: jwtSecret })).unless({
   // 白名单
-  path: ['/auth/login', '/auth/register']
+  path: ['/auth/login', '/auth/register', '/auth/memberLogin', '/member/addMember']
 }))
 
 

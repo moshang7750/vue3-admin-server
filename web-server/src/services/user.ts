@@ -24,11 +24,13 @@ export const getUser = async ({ username, email, phone, page, size} : IGetUserPr
   Role.hasOne(UserModel, { foreignKey: 'id'})
   UserModel.belongsTo(Role);
   const result = await UserModel.findAndCountAll({
-    // subQuery:  false,
+    subQuery:  false,
     include: [{
       model: UserGroup,
+      attributes:[]
     },{
       model: Role,
+      attributes:[]
     }],
     attributes: [
       'id',

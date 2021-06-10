@@ -6,6 +6,7 @@ import errorInfo from '../constants/errorInfo'
 import { createMd5 } from '../utils/createMD5'
 import { createToken } from '../utils/token'
 import { SuccessCode, SuccessTypeInfo } from '../services/success.type'
+import { getMemberInfo } from '../services/member'
 
 const { registerUserNameExistInfo, registerFailInfo, loginFailInfo } = errorInfo
 
@@ -58,3 +59,25 @@ export const loginController = async (params: LoginModel) => {
   const { code, message } = loginFailInfo
   return new ErrorResponse(code, message)
 }
+
+interface LoginMemberModel {
+  name: string
+  password: string
+}
+
+export const loginMemberController = async (params: LoginMemberModel) => {
+  const { name, password } = params
+  // 根据用户名和密码 获取用户信息
+  const userInfo = await getMemberInfo({ name, password })
+  if (userInfo) {
+    const { id, name } = userInfo
+    const token = createToken({ id, name })
+
+    return new SuccessResponse(SuccessCode.x, SuccessTypeInfo.login, { token })
+  }
+  // 获取不到返回 登录失败
+  const { code, message } = loginFailInfo
+  return new ErrorResponse(code, message)
+}
+
+

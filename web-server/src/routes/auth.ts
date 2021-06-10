@@ -1,5 +1,5 @@
 import Router from '@koa/router'
-import { loginController, registerController } from '../controller/auth'
+import { loginController, loginMemberController, registerController } from '../controller/auth'
 
 const router = new Router({
   prefix: '/auth'
@@ -22,6 +22,15 @@ router.post('/register', async ctx => {
   ctx.body = await loginController({ username, password })
 })
 
+
+/**
+ * 会员登录
+ */
+
+router.post('/memberLogin', async ctx => {
+  const { name, password } = ctx.request.body
+  ctx.body = await loginMemberController({ name, password })
+})
 
 /**
  * 测试接口

@@ -4,6 +4,12 @@ export interface UserWhereProps {
   id?: number
 }
 
+export interface MemberWhereProps {
+  name: string
+  password?: string
+  id?: number
+}
+
 export interface  ITableData<T> {
   rows: T[]
   count: number
